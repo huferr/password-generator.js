@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+  </head>
+  <style>
+    html {
+      height: 100%;
+    }
+    body {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 400px;
+    }
+
+    .input-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .action-buttons-container {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+
+    #copyBtn,
+    #generateBtn {
+      width: 100%;
+    }
+
+    .range-container {
+      width: 100%;
+      display: flex;
+      gap: 8px;
+    }
+    #range {
+      width: 100%;
+    }
+
+    .options-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <div class="input-container">
+        <input id="passwordInput" />
+        <div class="action-buttons-container">
+          <button id="copyBtn">Copy</button>
+          <button id="generateBtn">Generate</button>
+        </div>
+      </div>
+
+      <div class="range-container">
+        <input type="range" id="range" max="50" value="10" />
+        <span id="lengthValue"></span>
+      </div>
+
+      <div class="options-container">
+        <div>
+          <input id="special" type="checkbox" value="special" checked />
+          <label for="special">#@$</label>
+        </div>
+
+        <div>
+          <input id="upperCase" type="checkbox" value="upperCase" checked />
+          <label for="upperCase">ABC</label>
+        </div>
+        <div>
+          <input id="lowerCase" type="checkbox" value="lowerCase" checked />
+          <label for="lowerCase">abc</label>
+        </div>
+        <div>
+          <input id="numbers" type="checkbox" value="numbers" checked />
+          <label for="numbers">123</label>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="generator.js"></script>
+</html>

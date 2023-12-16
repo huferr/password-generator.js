@@ -15,34 +15,35 @@
 
       <div class="range-container">
         <input type="range" id="range" max="50" value="10" />
-        <span id="lengthValue"></span>
+        <span id="lengthValue">10</span>
       </div>
 
       <div class="options-container">
         <div>
-          <input id="special" type="checkbox" value="special" checked />
+          <input type="checkbox" id="special" checked />
           <label for="special">#@$</label>
         </div>
 
         <div>
-          <input id="upperCase" type="checkbox" value="upperCase" checked />
-          <label for="upperCase">ABC</label>
+          <input type="checkbox" id="upperCase" checked />
+          <label for="üpperCase">ABC</label>
         </div>
+
         <div>
-          <input id="lowerCase" type="checkbox" value="lowerCase" checked />
+          <input type="checkbox" id="lowerCase" checked />
           <label for="lowerCase">abc</label>
         </div>
+
         <div>
-          <input id="numbers" type="checkbox" value="numbers" checked />
+          <input type="checkbox" id="numbers" checked />
           <label for="numbers">123</label>
         </div>
       </div>
-
       <div class="action-buttons-container">
         <button id="copyBtn">Copy</button>
         <button id="generateBtn">Generate</button>
       </div>
     </div>
+    <script src="generator.js"></script>
   </body>
-  <script src="generator.js"></script>
 </html>

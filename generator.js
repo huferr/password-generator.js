@@ -5,7 +5,6 @@ function shuffle(array) {
   while (currentIndex > 0) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex--;
-
     [array[currentIndex], array[randomIndex]] = [
       array[randomIndex],
       array[currentIndex],
@@ -25,18 +24,18 @@ function passwordGenerator({
   const abcUper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   const abcLower = abcUper.map((c) => c.toLocaleLowerCase());
   const numbers = "0123456789".split("");
-  const specialChars = "!@#$%&*(?)_+=[]{}/<>".split("");
+  const specialChars = "!@#$%&*()+_?/{}[]<>".split("");
 
   const constraints = Object.entries({
     addNumbers,
     addSpecial,
-    addUpperCase,
     addLowerCase,
+    addUpperCase,
   }).filter((cons) => cons[1] === true);
 
   if (!constraints.length) return "";
 
-  const amountOfCharForEachConstraint =
+  const amountOfCharsForEachConstraint =
     Math.floor(length / constraints.length) <= 0
       ? length
       : Math.floor(length / constraints.length);
@@ -44,12 +43,12 @@ function passwordGenerator({
   const result = [];
 
   const addChars = (charArray) => {
-    const resultArray = charArray;
+    const resultArray = shuffle(charArray);
 
     const pushNewChars = (charArray) => {
       const shuffled = shuffle(charArray);
 
-      resultArray.push(...shuffled.slice(0, amountOfCharForEachConstraint));
+      resultArray.push(...shuffled.slice(0, amountOfCharsForEachConstraint));
     };
 
     if (addNumbers) pushNewChars(numbers);
@@ -69,9 +68,9 @@ function passwordGenerator({
 
   const charsArray = addChars(result);
 
-  const suffledFinalArray = shuffle(charsArray);
+  const shuffledFinalArray = shuffle(charsArray);
 
-  return suffledFinalArray.join("");
+  return shuffledFinalArray.join("");
 }
 
 const passwordInput = document.getElementById("passwordInput");
@@ -81,24 +80,25 @@ const lengthValueSpan = document.getElementById("lengthValue");
 
 // inputs
 const specialCharsInput = document.getElementById("special");
-const upperCharsInput = document.getElementById("upperCase");
-const lowerCharsInput = document.getElementById("lowerCase");
+const upperCaseInput = document.getElementById("upperCase");
+const lowerCaseInput = document.getElementById("lowerCase");
 const numbersInput = document.getElementById("numbers");
 const rangeInput = document.getElementById("range");
 
 // variables
+
 let hasSpecialChars = specialCharsInput.checked;
-let hasUpperCase = upperCharsInput.checked;
-let hasLowerCase = lowerCharsInput.checked;
+let hasUpperCase = upperCaseInput.checked;
+let hasLowerCase = lowerCaseInput.checked;
 let hasNumbers = numbersInput.checked;
 let length = rangeInput.value;
 
 const generateNewPassword = () => {
   passwordInput.value = passwordGenerator({
-    addSpecial: hasSpecialChars,
-    addUpperCase: hasUpperCase,
     addLowerCase: hasLowerCase,
     addNumbers: hasNumbers,
+    addSpecial: hasSpecialChars,
+    addUpperCase: hasUpperCase,
     length,
   });
 };
@@ -109,12 +109,12 @@ specialCharsInput.addEventListener("click", () => {
   generateNewPassword();
 });
 
-upperCharsInput.addEventListener("click", () => {
+upperCaseInput.addEventListener("click", () => {
   hasUpperCase = !hasUpperCase;
   generateNewPassword();
 });
 
-lowerCharsInput.addEventListener("click", () => {
+lowerCaseInput.addEventListener("click", () => {
   hasLowerCase = !hasLowerCase;
   generateNewPassword();
 });
@@ -130,15 +130,14 @@ rangeInput.addEventListener("input", (e) => {
   generateNewPassword();
 });
 
-window.addEventListener("load", () => {
-  lengthValueSpan.innerHTML = length;
-  generateNewPassword();
-});
-
 generateButton.addEventListener("click", () => {
   generateNewPassword();
 });
 
 copyButton.addEventListener("click", () => {
   navigator.clipboard.writeText(passwordInput.value);
+});
+
+window.addEventListener("load", () => {
+  generateNewPassword();
 });
